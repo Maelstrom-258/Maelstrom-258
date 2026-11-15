@@ -46,10 +46,9 @@ Sinto vontade grandíssima de trabalhar com:
 
 ## 📊 GitHub
 
-<p>
-  <img height="165" alt="Estatísticas do GitHub" src="https://github-readme-stats.vercel.app/api?username=Maelstrom-258&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true" />
-  <img height="165" alt="Linguagens mais usadas" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Maelstrom-258&layout=compact&theme=tokyonight&hide_border=true" />
-</p>
+![Estatísticas públicas do GitHub](./profile/stats.svg)
+
+![Linguagens mais usadas nos repositórios públicos](./profile/languages.svg)
 
 ## 🤝 Vamos conversar?
 

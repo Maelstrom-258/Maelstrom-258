@@ -1,0 +1,42 @@
+name: Atualizar cartões do perfil
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "scripts/generate_profile_cards.py"
+      - ".github/workflows/profile-cards.yml"
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-cards:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v7
+      - name: Preparar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
+      - name: Gerar cartões
+        run: python scripts/generate_profile_cards.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ github.repository_owner }}
+      - name: Salvar cartões atualizados
+        run: |
+          if git diff --quiet -- profile/stats.svg profile/languages.svg; then
+            echo "Os cartões já estão atualizados."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/stats.svg profile/languages.svg
+          git commit -m "chore: atualizar cartões de estatísticas"
+          git push
